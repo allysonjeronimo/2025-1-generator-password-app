@@ -9,6 +9,7 @@ export default function App(){
 
   const [size, setSize] = useState(10)
   const [isModalVisible, setModalVisible] = useState(false)
+  const [password, setPassword] = useState("")
 
   function generatePassword(){
     let value = ""
@@ -16,6 +17,7 @@ export default function App(){
       let randomNumber = Math.random() * charset.length
       value += charset.charAt(Math.floor(randomNumber))
     }
+    setPassword(value)
     setModalVisible(true)
   }
 
@@ -42,7 +44,7 @@ export default function App(){
         <Text style={styles.buttonText} selectable={false}>Gerar Senha</Text>
       </Pressable>
       <Modal visible={isModalVisible} animationType='fade' transparent={true}>
-        <ModalPassword/>
+        <ModalPassword password={password} onClose={ () => setModalVisible(false)}/>
       </Modal>
     </View>
   )
